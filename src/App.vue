@@ -1,25 +1,29 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <div>
-    <h4>{{ products[0] }} 원룸</h4>
-    <p>50 만원</p>  <!-- vue 문법  {{ 변수 }} (-> 자주 변경되거나 중요해보이는 데이터는 데이터 바인딩을 사용한다) -->
+  <div class="menu">
+    <a v-for="a in 메뉴들" :key="a"> {{ a }} </a>
   </div>
-  <div>
-    <h4>{{ products[1] }} 원룸</h4> <!-- :style="blue" (-> HTML 속성을 지정할땐 속성앞 ':' 추가) -->
-    <p>70 만원</p>
-  </div>
-  <div>
-    <h4>{{ products[2] }} 원룸</h4> 
-    <p> 만원</p>
+  <div v-for="(products, i) in products" :key="i">
+    <img :src="`./assets/room${i}.jpg`" class="room-img">
+    <h4>{{ products }} 원룸</h4>
+    <p>50 만원</p>
+    <button @click="increase(i)">허위매물신고</button>
+    <span>신고수 : {{ 신고수[i] }}</span>
   </div>
 </template>
 
 <script>
 export default {
   name : 'App',
-  data() { // 모든 면수 데이터
+  data() { // 모든 변수 데이터
     return {
+      신고수 : [0, 0, 0],
+      메뉴들 : ['Home', 'Shop', 'About'],
       products : ['역삼동원룸', '천호동원룸', '마포구원룸']
+    }
+  },
+  methods: {
+    increase(x) {
+      this.신고수[x] += 1;
     }
   },
   components : {
@@ -28,4 +32,21 @@ export default {
 </script>
 
 <style>
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+}
+
+.menu {
+  background: darkslateblue;
+  padding: 15px;
+  border-radius: 5px;
+}
+.menu a {
+  color: white;
+  padding: 10px;
+}
 </style>
