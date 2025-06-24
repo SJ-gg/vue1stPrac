@@ -1,44 +1,47 @@
 <template>
 
-  <div class="black-bg" v-if="모달창열렸니">
-    <div class="white-bg">
-      <h4>상세페이지</h4>
-      <p>상세페이지 내용</p>
-      <button @click="모달창열렸니 = false">닫기</button>
-    </div>
-  </div>
+  <Modal :products="products" :productsClick="productsClick" :모달창열렸니="모달창열렸니"/>
 
   <div class="menu">
     <a v-for="a in 메뉴들" :key="a"> {{ a }} </a>
   </div>
-  <div v-for="(products, i) in products" :key="i">
+
+  <Discount/>
+
+  <Card :product="products" v-for="(products, i) in products" :key="i" />
+
+  <!-- <div v-for="(products, i) in products" :key="i">
     <img :src="products.image" alt="room image" class="room-img">
-    <h4 @click="모달창열렸니 = true">{{ products.title }} 원룸</h4>
+    <h4 @click="모달창열렸니 = true; productsClick = i">{{ products.title }} </h4>
     <p>{{ products.price }} 만원</p>
-    <button @click="increase(i)">허위매물신고</button>
-    <span> 신고수 : {{ 신고수[i] }}</span>
-  </div>
+  </div> -->
 </template>
 
 <script>
 import data from './assets/oneroom.js'
+import Discount from './Discount.vue'
+import Modal from './Modal.vue'
+import Card from './Card.vue'
 
 export default {
   name : 'App',
   data() { // 모든 변수 데이터
     return {
+      productsClick: 0,
       products : data,
       모달창열렸니 : false,
-      신고수 : [0, 0, 0],
       메뉴들 : ['Home', 'Shop', 'About'],
     }
   },
   methods: {
     increase(x) {
-      this.신고수[x] += 1;
-    }
+      this.x += 1;
+    },
   },
   components : {
+    Discount : Discount, // 'Discount,'과 같음.
+    Modal,
+    Card,
   }
 }
 </script>
@@ -49,6 +52,13 @@ body {
 }
 div {
   box-sizing: border-box;
+}
+
+.discount {
+  background: #eee;
+  padding: 10px;
+  margin: 10px;
+  border-radius: 5px;
 }
 .black-bg {
   width: 100%; height: 100%;
