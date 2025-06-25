@@ -1,6 +1,6 @@
 <template>
 
-  <Modal :products="products" :productsClick="productsClick" :모달창열렸니="모달창열렸니"/>
+  <Modal @closeModal="모달창열렸니 = false" :products="products" :productsClick="productsClick" :모달창열렸니="모달창열렸니"/>
 
   <div class="menu">
     <a v-for="a in 메뉴들" :key="a"> {{ a }} </a>
@@ -8,13 +8,7 @@
 
   <Discount/>
 
-  <Card :product="products" v-for="(products, i) in products" :key="i" />
-
-  <!-- <div v-for="(products, i) in products" :key="i">
-    <img :src="products.image" alt="room image" class="room-img">
-    <h4 @click="모달창열렸니 = true; productsClick = i">{{ products.title }} </h4>
-    <p>{{ products.price }} 만원</p>
-  </div> -->
+  <Card @openModal="모달창열렸니 = true; productsClick = $event" :product="products" v-for="(products, i) in products" :key="i" />
 </template>
 
 <script>
