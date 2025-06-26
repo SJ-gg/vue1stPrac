@@ -23,7 +23,6 @@ export default {
     month(monthNum) {
       if (monthNum === '') return;
       if (
-        typeof monthNum !== 'number' ||
         isNaN(this.month) ||
         monthNum < 0 ||
         monthNum > 12
