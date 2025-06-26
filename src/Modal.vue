@@ -4,7 +4,8 @@
       <h4>{{ products[productsClick].title }}</h4>
       <img :src="products[productsClick].image" alt="room image" class="room-img" style="width: 100%">
       <p>{{ products[productsClick].content }}</p>
-      <p>{{ products[productsClick].price }} 원</p>
+      <input @input="month = $event.target.value">
+      <p> {{ month }} 개월 선택함 : {{ products[productsClick].price }} 원</p>
       <button @click="closeModal()">닫기</button>
     </div>
   </div>
@@ -13,6 +14,11 @@
 <script>
 export default {
   name: 'Modal',
+  data() {
+    return {
+      month: 1,
+    }
+  },
   props: {
     products: Array,
     productsClick: Number,
