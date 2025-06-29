@@ -16,7 +16,7 @@ export default {
   name: 'Modal',
   data() {
     return {
-      month: 1,
+      month: 0,
     }
   },
   watch: {
@@ -27,8 +27,8 @@ export default {
         monthNum < 0 ||
         monthNum > 12
       ) {
-        alert('1~12 사이의 숫자만 입력할 수 있습니다.');
-        this.month = 1;
+        alert('3~12 사이의 숫자만 입력할 수 있습니다.');
+        this.month = 0;
       }
     }
   },
@@ -42,6 +42,12 @@ export default {
       this.$emit('closeModal');
     },
   },
+  beforeUpdate() {
+    if (this.month == 2 && this.month > 1) {
+      this.month = 3;
+      alert('최소 3개월 이상 선택해야 합니다.');
+    }
+  }
 }
 </script>
 

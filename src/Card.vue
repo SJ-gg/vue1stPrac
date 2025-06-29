@@ -2,7 +2,7 @@
   <div>
     <img :src="product.image" alt="room image" class="room-img">
     <h4 @click="openModal()"> {{ product.title }} </h4>
-    <p>{{ product.price }} 만원</p>
+    <p>월 {{ product.price }} 만원</p>
   </div>
 </template>
 
